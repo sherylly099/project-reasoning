@@ -1,30 +1,30 @@
 ---
 name: project-reasoning
-description: 当项目中的一个具体决定需要澄清需求、检验方案、定位反复出现的故障、评估接手难点或复盘重复返工时使用。适合用户想知道问题出在哪里、方案是否成立、下一步怎样验证的场景。已有明确做法的日常编辑可直接办理。
+description: Use when a project decision calls for clarifying requirements, testing a proposal, diagnosing a recurring failure, assessing a handoff, or reviewing repeated rework. Use for questions about causes, trade-offs, or what to verify next.
 ---
 
-# 项目问题分析
+# Project reasoning
 
-从用户要作的决定选一个入口。沿用已有目标、约束、材料和授权。若同时涉及多个入口，先解决会改变下一步的那个问题。结论指出依据和一个可观察的下一步。发现材料缺口时，说明补哪份材料能区分哪些解释。
+Start with the decision the user needs to make. Use the goals, constraints, evidence, and permissions already available. If several approaches apply, start with the uncertainty most likely to change the next decision. Explain what supports the conclusion and give an observable next step. Where evidence is missing, identify what would distinguish the remaining explanations.
 
-## 需求澄清
+## Clarify a requirement
 
-用一个真实使用场景写清谁希望得到什么结果。把用户提出的做法放回场景，判断成功是否必须依赖这种做法。若存在另一种问题解释，给出依据，由用户判断是否符合原意。已有材料足够时直接推荐。若一个偏好会改变推荐，只问会影响取舍的问题，一轮最多三个。有实质取舍时给出备选、各自代价和首选的理由。
+Use a real example to identify who needs a different outcome and what success would look like. Check whether the proposed feature is necessary to achieve that outcome. If another interpretation fits, give the evidence and let the user judge. Recommend a path when the evidence is sufficient. Ask up to three questions at a time only if the answers could change the recommendation. Where alternatives involve a meaningful trade-off, explain their costs and why one is preferable.
 
-## 实施前评审
+## Review a proposal
 
-找出一个一旦失效就会改变决策的假设。给出能推翻它的观察，以及取得该观察的最低成本办法。对仍值得考虑的方案，沿具体调用路径或用户操作追踪直接效果和后续影响，写明影响发生的条件。交付继续、调整或暂缓的建议，以及哪个结果会让建议改变。
+Identify an assumption whose failure would change the decision. Describe an observation that would disprove it and the least expensive way to obtain that observation. For viable proposals, trace a concrete user action or dependency to its immediate and downstream effects. State the conditions under which each effect would occur. Recommend proceeding, revising, or deferring, and identify a result that would change the recommendation.
 
-## 故障定位与修复
+## Diagnose and repair a failure
 
-从一次实际失败入手，核对输入、预期、实际表现和可用日志。若多个解释都说得通，选择一次能让它们产生不同结果的检查。记录观察到的结果。仅在版本差异或兼容约束可能解释故障时查相关提交、PR 或设计记录。用户要求修复时，按证据实施范围内的最小改动，用原失败样例和相关正常路径复验。涉及移除旧逻辑时核实当前使用者及兼容约束。证据不足时交付仍成立的解释和区分它们所需的观察。
+Start with one failing example. Compare the input, expected behavior, observed behavior, and relevant logs. When multiple explanations fit, choose a check that predicts a different result for each and record what happens. Consult commits, pull requests, or design notes when version differences or compatibility requirements could explain the failure. If a repair was requested, make the smallest supported change within scope and verify both the original failure and a related working case. Before removing legacy logic, check its consumers and compatibility requirements. If the cause is still uncertain, report the remaining explanations and the observation needed to distinguish them.
 
-## 维护与复盘
+## Assess maintenance and recurring problems
 
-- **交接或可维护性评估。** 选一个新人要独立完成的真实任务，从入口走到产出，定位在哪一步需要额外上下文，以及信息藏在哪个文件或哪条依赖中。提出最小简化办法。用另一次独立走查验证新人能否完成同一任务。
-- **重复故障或返工。** 在约定时间内合并同一事件的多次记录。将候选共因逐一对应到独立事件，考虑相同症状来自不同原因的可能。按预防成本选择一项改进。能用稳定输入输出判断的优先考虑测试，涉及人的取舍才考虑规则。给出衡量复发的口径与观察期，规则的实际写入或自动化按用户的任务范围办理。
-- **交付延迟。** 只有当问题涉及 PR 周期且有相应时间戳时，才拆分等待评审、修改、CI 和等待合并的时间。比较同类 PR 并标出草稿或暂停期。若只有创建与合并时间，仅能判断总历时，需补事件记录才能归因。
+- **Handoffs.** Walk through a real task a newcomer should complete independently. Identify the step where progress depends on undocumented context and locate the file or dependency that holds the missing information. Propose a small improvement and verify it with an independent walkthrough.
+- **Recurring failures or rework.** Choose a time window and consolidate duplicate reports of the same incident. Trace each proposed common cause to independent incidents. Similar symptoms can have different causes. Choose one proportionate preventive measure. Consider a test when stable inputs and outputs can detect the issue, or a short rule when human judgment matters. Specify how and when to measure recurrence. Implement changes within the user's requested scope.
+- **Delivery delays.** When reviewing pull request cycle time, use event timestamps to distinguish review queues, revisions, CI, and merge waits. Compare similar changes and account for drafts and pauses. Open and merge timestamps establish total duration. Attribution requires intermediate events.
 
-## 思路停滞时
+## Explore alternatives when stuck
 
-常规方案遇到具体约束，再引入跨领域类比。指出可借用的机制、两处情境的关键差异，以及一个能检验迁移是否成立的小实验。类比用于提出备选，最终判断回到本项目的证据。
+If a specific constraint blocks the usual options, look for a comparable mechanism in another field. Explain what transfers, where the situations differ, and how a small experiment could test the idea in this project.

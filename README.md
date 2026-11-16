@@ -1,47 +1,47 @@
-# project-reasoning · 项目问题分析
+# Project Reasoning
 
-一个 Codex skill，帮助你在项目里做具体决定。把 `$project-reasoning` 和问题一起发给 Codex 即可。可以点名场景，也可以直接描述你遇到的事。下面用同一个“每日项目摘要”的例子演示四种问法。[可复制的通用模板](调用速查.md)
+A Codex skill for making a project decision when the goal, the proposed approach, or the cause of a problem is uncertain. Invoke it with `$project-reasoning` and describe the decision. The four examples below follow a team considering a daily project digest. For other projects, use the [copyable prompt templates](QUICKSTART.md).
 
-## 1. 需求澄清
+## 1. Clarify a requirement
 
-当你已经想到一个功能、还在判断值不值得做时，描述一次真实经历，以及你希望发生的变化。你会得到一个更明确的目标和验证办法。
-
-```text
-用 $project-reasoning 帮我澄清需求。我想给项目加每日摘要，因为每天早上要翻好几个聊天才知道该接着做什么。请判断我最需要解决的问题，给一个最省力的验证办法。只有缺失信息会改变建议时再问我。
-```
-
-## 2. 方案评审
-
-当目标已明确、做法待定时，给出候选方案和成功标准。评审会指出什么情况足以推翻这个方案，以及动工前怎样检验它。
+Describe a real situation and the outcome you want. This works especially well when you have a feature in mind and want to decide whether it would solve the problem.
 
 ```text
-用 $project-reasoning 评审这个方案。我打算让每个主题每天生成摘要，再汇总到主窗口。目标是每天早上用两分钟找到下一步。请找出最可能让方案失效的假设，说明怎样低成本验证，再建议继续、调整还是暂缓。
+Use $project-reasoning to clarify a requirement. Every morning I read several project threads before I can tell what to do next. I'm considering a daily digest. What outcome should I aim for, and how could I check cheaply whether a digest would help? Ask me a question only if the answer could change your recommendation.
 ```
 
-## 3. 故障定位
+## 2. Review a proposal
 
-选一次实际失败，附上原始输入、预期结果和实际输出。想要修复时，在请求里写明可以修改的范围。
+Supply a proposed approach and a success criterion. Ask for the cheapest observation that could change your decision before implementation.
 
 ```text
-用 $project-reasoning 定位这个故障。昨天的摘要漏掉了一条已经完成的任务。原始记录是[记录]，摘要是[输出]。请沿这条记录追踪它在哪一步消失，区分是读取遗漏还是汇总遗漏。先给定位结论。
+Use $project-reasoning to review my plan to combine daily summaries from each project thread into a single digest. The goal is to identify my next task within two minutes. Which assumption is most likely to undermine the plan? How can I test it cheaply? Recommend whether to proceed, revise, or defer.
 ```
 
-如需一起修复，可在末尾追加「原因确认后，请修复摘要脚本，用这条记录和一条原本正常的记录复验」。
+## 3. Diagnose a failure
 
-## 4. 维护复盘
-
-同类问题反复出现时，附上几次独立事件的记录。复盘会核对它们是否有共同原因，再给出一项可衡量的预防措施。
+Choose a specific failure and include the expected result, actual output, and relevant input. If you want a repair, specify what may be changed.
 
 ```text
-用 $project-reasoning 复盘最近三次摘要漏项。对应记录是[事件一、二、三]。请判断它们是否有共同原因，给出一项最值得先做的预防措施，并说明下个月怎样判断它有效。
+Use $project-reasoning to investigate a missing entry in yesterday's digest. The original task record is [record], and the generated digest is [output]. Trace the record to the step where it disappears. What evidence distinguishes an input omission from a summarization error?
 ```
 
-维护也包括交接。想降低新人接手成本时，可以换成下面的问法。
+For a repair, add “Once you verify the cause, fix the digest script and check both the missing entry and an entry that already appeared correctly.”
+
+## 4. Review maintenance and rework
+
+Provide independent incident records to investigate a recurring problem. Ask for one preventive measure and a way to measure whether it helps.
 
 ```text
-用 $project-reasoning 评估这个项目的交接难度。从新人第一次接手的角度，沿“找到当前任务并继续工作”走一遍。请指出在哪一步必须问老成员才能继续，建议怎样消除这个障碍，并给出检验办法。
+Use $project-reasoning to review the last three missing digest entries. Here are the incident records: [records]. Do they share a cause? Recommend one preventive measure and tell me how to evaluate it next month.
 ```
 
-## 文件与安装
+For a handoff, supply a task the next person needs to complete independently.
 
-归档目录 `project-reasoning/` 可作为独立 GitHub 仓库的根目录。[SKILL.md](SKILL.md) 保存执行指引，[调用速查.md](调用速查.md) 提供可替换材料的模板。手动安装时，将整个目录放在 Codex 个人 skills 目录下，默认路径为 `~/.codex/skills/project-reasoning/`。
+```text
+Use $project-reasoning to assess this project's handoff. Walk through how a newcomer would find the current task and continue it. At which step would they need help from an experienced teammate? Suggest the smallest change that would let them finish independently and a way to verify it.
+```
+
+## Installation
+
+Place the repository directory under your personal Codex skills directory, usually at `~/.codex/skills/project-reasoning/`, with [SKILL.md](SKILL.md) at its root. Then include `$project-reasoning` in your request.
